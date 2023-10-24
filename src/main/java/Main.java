@@ -13,6 +13,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 
 // Класс представляющий сервер
 class Server {
@@ -21,7 +24,108 @@ class Server {
     private String ipAddress;
     private int consecutiveFailures;
 
+    public Server(int id, String name, String ipAddress) {
+        
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setConsecutiveFailures(int consecutiveFailures) {
+        this.consecutiveFailures = consecutiveFailures;
+    }
+
+    public int getConsecutiveFailures() {
+        return consecutiveFailures;
+    }
+}
+
+// Класс представляющий ошибки
+class Error {
+    private int id;
+    private long timestamp;
+    private String errorText;
+    private Server server;
+
     // Конструктор, геттеры и сеттеры
+}
+
+class HealthCheckApp {
+    private List<Server> servers = new ArrayList<Server>();
+    private List<Error> errors = new ArrayList<Error>();
+
+    public void addServer(Server server) {
+        // Логика добавления сервера в базу данных
+    }
+
+    public void removeServer(Server server) {
+        // Логика удаления сервера из базы данных
+    }
+
+    public void editServer(Server server) {
+        // Логика редактирования сервера в базе данных
+    }
+
+    public List<Error> getErrors(Server server) {
+        // Логика получения ошибок для определенного сервера
+        return(null);
+    }
+
+    public void notifyUser(Server server, String errorMessage) {
+        // Логика уведомления пользователя об ошибке
+    }
+
+
+    public Server createServerFromDatabase(int serverId) {
+        Server server = null;
+        try {
+            // Установите соединение с базой данных
+            String jdbcURL = "jdbc:mysql://localhost:3306/yourdb";
+            String dbUsername = "yourusername";
+            String dbPassword = "yourpassword";
+            Connection connection = DriverManager.getConnection(jdbcURL, dbUsername, dbPassword);
+
+            // Запрос для извлечения данных сервера по его идентификатору
+            String selectQuery = "SELECT * FROM server WHERE id = ?";
+            PreparedStatement selectStatement = connection.prepareStatement(selectQuery);
+            selectStatement.setInt(1, serverId);
+            ResultSet resultSet = selectStatement.executeQuery();
+
+            if (resultSet.next()) {
+                // Извлекаем данные из результата запроса и создаем объект Server
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String ipAddress = resultSet.getString("ip_address");
+                int consecutiveFailures = resultSet.getInt("consecutive_failures");
+
+                server = new Server(id, name, ipAddress);
+                server.setConsecutiveFailures(consecutiveFailures);
+            }
+
+            // Закрываем ресурсы
+            resultSet.close();
+            selectStatement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return server;
+    }
+
+
 
     public boolean isAvailable(Server server) {
         try {
@@ -46,7 +150,6 @@ class Server {
 
     public void logError(Server server) {
         try {
-            // Установите соединение с базой данных (здесь предполагается использование MySQL)
             String jdbcURL = "jdbc:mysql://localhost:3306/yourdb"; // Замените на вашу базу данных
             String dbUsername = "yourusername"; // Замените на ваше имя пользователя
             String dbPassword = "yourpassword"; // Замените на ваш пароль
@@ -97,94 +200,6 @@ class Server {
         // Здесь может быть отправка уведомления по электронной почте, SMS и т. д.
     }
 
-    public String getIpAddress() {
-        return ipAddress;
-    }
-
-    public void setIpAddress(String ipAddress) {
-        this.ipAddress = ipAddress;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-}
-
-// Класс представляющий ошибки
-class Error {
-    private int id;
-    private long timestamp;
-    private String errorText;
-    private Server server;
-
-    // Конструктор, геттеры и сеттеры
-}
-
-public class HealthCheckApp {
-    private List<Server> servers = new ArrayList<Server>();
-    private List<Error> errors = new ArrayList<Error>();
-
-    public void addServer(Server server) {
-        // Логика добавления сервера в базу данных
-    }
-
-    public void removeServer(Server server) {
-        // Логика удаления сервера из базы данных
-    }
-
-    public void editServer(Server server) {
-        // Логика редактирования сервера в базе данных
-    }
-
-    public List<Error> getErrors(Server server) {
-        // Логика получения ошибок для определенного сервера
-    }
-
-    public void notifyUser(Server server, String errorMessage) {
-        // Логика уведомления пользователя об ошибке
-    }
-
-
-    public Server createServerFromDatabase(int serverId) {
-        Server server = null;
-        try {
-            // Установите соединение с базой данных
-            String jdbcURL = "jdbc:mysql://localhost:3306/yourdb";
-            String dbUsername = "yourusername";
-            String dbPassword = "yourpassword";
-            Connection connection = DriverManager.getConnection(jdbcURL, dbUsername, dbPassword);
-
-            // Запрос для извлечения данных сервера по его идентификатору
-            String selectQuery = "SELECT * FROM server WHERE id = ?";
-            PreparedStatement selectStatement = connection.prepareStatement(selectQuery);
-            selectStatement.setInt(1, serverId);
-            ResultSet resultSet = selectStatement.executeQuery();
-
-            if (resultSet.next()) {
-                // Извлекаем данные из результата запроса и создаем объект Server
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String ipAddress = resultSet.getString("ip_address");
-                int consecutiveFailures = resultSet.getInt("consecutive_failures");
-
-                server = new Server(id, name, ipAddress);
-                server.setConsecutiveFailures(consecutiveFailures);
-            }
-
-            // Закрываем ресурсы
-            resultSet.close();
-            selectStatement.close();
-            connection.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return server;
-    }
-
 
     public static void main(String[] args) {
         // Создаем экземпляр HealthCheckApp и добавляем серверы
@@ -198,13 +213,26 @@ public class HealthCheckApp {
         int serverIdFromDatabase = 1; // Замените на фактический идентификатор сервера
         Server serverFromDatabase = app.createServerFromDatabase(serverIdFromDatabase);
 
-        // Проверяем доступность сервера
-        if (serverFromDatabase != null) {
-            if (app.isAvailable(serverFromDatabase)) {
-                // Сервер доступен
-            } else {
-                // Сервер недоступен, записываем ошибку
-                app.logError(serverFromDatabase);
+        // Создаем ExecutorService с фиксированным количеством потоков
+        ExecutorService executor = Executors.newFixedThreadPool(2); // Настройте количество потоков по вашему выбору
+
+        // Зацикливаем проверку всех серверов в базе данных
+        while (true) {
+            for (Server server : app.servers) {
+                // Выполняем проверку каждого сервера в отдельном потоке
+                executor.execute(() -> {
+                    // Вызываем logError, если сервер недоступен
+                    if (!app.isAvailable(server)) {
+                        app.logError(server);
+                    }
+                });
+            }
+
+            try {
+                // Пауза между проверками
+                Thread.sleep(60000); // 60 секунд (1 минута)
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
