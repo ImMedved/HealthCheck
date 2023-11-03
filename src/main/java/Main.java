@@ -289,7 +289,7 @@ class Server {
     private int consecutiveFailures;
 
     public Server(int id, String name, String ipAddress) {
-
+        
     }
 
     public String getIpAddress() {
@@ -304,6 +304,9 @@ class Server {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setConsecutiveFailures(int consecutiveFailures) {
         this.consecutiveFailures = consecutiveFailures;
@@ -316,5 +319,10 @@ class Server {
 
 // Класс представляющий ошибки
 class Error {
+    private int id;
+    private long timestamp;
+    private String errorText;
+    private Server server;
 
+    // Конструктор, геттеры и сеттеры
 }
