@@ -1,5 +1,3 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
@@ -62,33 +60,9 @@ class HealthCheckApp {
         JButton startCheckButton = new JButton("Запустить проверку");
         panel.add(startCheckButton);
 
-        String name = nameField.toString();
-        String url = urlField.toString();
-
         startCheckButton.addActionListener(e -> {
-            int serverIdFromDatabase = 1; // Как заменить на фактический идентификатор сервера?
+            int serverIdFromDatabase = 1; // Заменить на фактический идентификатор сервера
             Server serverFromDatabase = app.createServerFromDatabase(serverIdFromDatabase);
-
-            if (name != null && url != null) {
-                addButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        String name = nameField.getText();
-                        String url = urlField.getText();
-                        serverListTextArea.append(name + " - " + url + "\n");
-
-
-                        // Создаем объект Server
-                        Server newServer = new Server(serverIdFromDatabase ,name, url);
-                        newServer.setIpAddress(url);
-
-                        app.addServer(newServer);
-
-                        nameField.setText("");
-                        urlField.setText("");
-                    }
-                });
-            }
 
             // ExecutorService с фиксированным количеством потоков
             // Если сделать неограниченное кол-во потоков, все ведь просто упадет на каком-то из вызовов?
@@ -127,25 +101,8 @@ class HealthCheckApp {
     private final List<Error> errors = new ArrayList<Error>();
 
     public void addServer(Server server) {
-        try {
-            // Установите соединение с базой данных
-            String jdbcURL = "jdbc:mysql://localhost:3306/yourdb";
-            String dbUsername = "yourusername";
-            String dbPassword = "yourpassword";
-            Connection connection = DriverManager.getConnection(jdbcURL, dbUsername, dbPassword);
-
-            // Подготовьте SQL-запрос для вставки нового сервера
-            String insertQuery = "INSERT INTO server (url, error_count, last_error_date) VALUES (?, 0, null)";
-            PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
-            insertStatement.setString(1, server.getIpAddress());
-            insertStatement.executeUpdate();
-
-            // Закрываем ресурсы
-            insertStatement.close();
-            connection.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }    }
+        // Логика добавления сервера в базу данных
+    }
 
     public void removeServer(Server server) {
         // Логика удаления сервера из базы данных
