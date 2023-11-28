@@ -1,0 +1,20 @@
+ServerEntity: Этот класс представляет объект сервера с полями id, name, address и errorCounter. Он аннотирован
+как JPA (Java Persistence API).
+
+ServerRepository: Интерфейс ServerRepository наследуется от JpaRepository, он используется postgreSQL
+в качестве базы данных для сохранения объектов ServerEntity.
+
+AppConfig: Класс конфигурации Spring содержит настройки, необходимые для создания RestTemplate.
+
+ServerService: Это сервис, который выполняет основную логику приложения. Он взаимодействует с ServerRepository для
+получения списка серверов и использует RestTemplate для проверки состояния каждого сервера. Если сервер не отвечает
+или возвращает код ответа, отличный от 200, сервис вызывает ErrorNotificationService для уведомления о проблеме.
+
+ErrorNotificationService: Уведомление об ошибке.
+
+ServerController: Это контроллер Spring, который обрабатывает HTTP-запросы для получения списка серверов.
+
+checkServers(): Метод checkServers() в ServerService выполняет итерацию по всем серверам, отправляя HTTP-запросы с помощью
+RestTemplate и обрабатывает ошибки.
+
+
