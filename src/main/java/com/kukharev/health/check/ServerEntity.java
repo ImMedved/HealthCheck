@@ -1,4 +1,4 @@
-package ServerCheck;
+package com.kukharev.health.check;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

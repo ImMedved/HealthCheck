@@ -1,4 +1,4 @@
-package ServerCheck;
+package com.kukharev.health.check;
 
 import org.springframework.stereotype.Service;
 // Я временно сделал вывод в консоль ide, все это можно стереть и писать новый вывод,

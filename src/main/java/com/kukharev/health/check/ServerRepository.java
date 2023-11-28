@@ -1,4 +1,4 @@
-package ServerCheck;
+package com.kukharev.health.check;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

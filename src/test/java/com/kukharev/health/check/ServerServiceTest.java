@@ -1,6 +1,5 @@
-package Test;
+package com.kukharev.health.check;
 
-import ServerCheck.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
