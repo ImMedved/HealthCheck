@@ -1,16 +1,19 @@
 package com.kukharev.health.check;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 @Entity
+@Table(name = "servers")
 public class ServerEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String address;
     private int errorCounter;
+
+    // Геттеры и сеттеры для полей
 
     public Long getId() {
         return id;
