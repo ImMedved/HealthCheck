@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error Log</title>
+    <!-- Подключаем стили, если необходимо -->
+</head>
+<body>
+<h1>Error Log</h1>
+<div id="error-log">
+    <!-- Место для отображения лога ошибок -->
+</div>
+
+<!-- Подключаем скрипт для обновления содержимого страницы -->
+<script>
+        function fetchErrors() {
+            fetch('/errors')
+                .then(response => response.json())
+                .then(errors => {
+                    const errorLog = document.getElementById('error-log');
+                    errorLog.innerHTML = '';
+                    errors.forEach(error => {
+                        const errorDiv = document.createElement('div');
+                        errorDiv.innerText = `${error.server.name}: ${error.timestamp} - Error occurred`;
+                        errorLog.appendChild(errorDiv);
+                    });
+                })
+                .catch(error => console.error('Error fetching errors:', error));
+        }
+
+        // Обновляем лог ошибок каждую минуту
+        setInterval(fetchErrors, 60000);
+
+        // Вызываем функцию для первоначальной загрузки лога ошибок
+        fetchErrors();
+    </script>
+</body>
+</html>
