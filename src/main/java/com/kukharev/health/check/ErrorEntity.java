@@ -19,7 +19,7 @@ public class ErrorEntity {
     @Column(name = "timestamp")
     private LocalDateTime timestamp;
 
-    // Геттеры и сеттеры для полей
+    // Getters and setters
     public ServerEntity getServer() {
         return server;
     }
@@ -34,5 +34,9 @@ public class ErrorEntity {
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
