@@ -1,33 +1,51 @@
 package com.kukharev.health.check;
 
+import static org.mockito.Mockito.*;
+
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
-
+@SpringBootTest(classes = AppConfig.class)
+@ContextConfiguration
 public class ServerServiceTest {
-    @Mock
-    private ServerRepository serverRepository;
 
-    @InjectMocks
+    @Autowired
     private ServerService serverService;
 
+    @MockBean
+    private ServerRepository serverRepository;
+
+    @MockBean
+    private ErrorRepository errorRepository;
+
     @Test
-    public void testGetAllServers() {
-        ServerEntity server1 = new ServerEntity();
-        ServerEntity server2 = new ServerEntity();
-        List<ServerEntity> serverList = Arrays.asList(server1, server2);
+    public void testLogError() {
+        // Подготовка данных
+        String serverUrl = "http://example.com";
+        ServerEntity serverEntity = new ServerEntity();
+        serverEntity.setId(1L);
+        serverEntity.setAddress(serverUrl);
+        serverEntity.setErrorCounter(0);
 
-        when(serverRepository.findAll()).thenReturn(serverList);
+        // Указываем, как должен вести себя serverRepository при вызове метода findByUrl
+        when(serverRepository.findByUrl(serverUrl)).thenReturn(serverEntity);
 
-        List<ServerEntity> result = serverService.getAllServers();
+        // Выполнение тестируемого метода
+        serverService.logError(serverUrl);
 
-        assertEquals(2, result.size());
+        // Проверка, что методы репозиториев были вызваны с ожидаемыми параметрами
+        verify(serverRepository, times(1)).findByUrl(serverUrl);
+        verify(errorRepository, times(1)).save(any(ErrorEntity.class));
+
+        // Проверка, что errorCounter сервера увеличился на 1
+        assert serverEntity.getErrorCounter() == 1;
+
+        // Проверка, что timestamp ошибки установлен корректно
+        verify(errorRepository, times(1)).save(argThat(error -> error.getTimestamp() != null && error.getTimestamp().isBefore(LocalDateTime.now())));
     }
 }
-
