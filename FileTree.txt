@@ -1,0 +1,27 @@
+src
+├── main
+│   ├── java
+│   │   └── com
+│   │       └── kukharev
+│   │           └── health
+│   │               ├── check
+│   │               │   ├── AppConfig.java           // Конфигурация Spring приложения
+│   │               │   ├── ErrorController.java     // Контроллер для обработки запросов об ошибках
+│   │               │   ├── ErrorEntity.java         // Сущность для хранения информации об ошибках в базе данных
+│   │               │   ├── ErrorLoggingService.java // Сервис для логирования ошибок в базу данных
+│   │               │   ├── ErrorLogService.java     // Контроллер для отображения логов ошибок в пользовательском интерфейсе
+│   │               │   ├── ErrorRepository.java     // Интерфейс репозитория для работы с ошибками в базе данных
+│   │               │   ├── ServerController.java    // Контроллер для работы с серверами
+│   │               │   ├── ServerEntity.java        // Сущность для хранения информации о серверах в базе данных
+│   │               │   ├── ServerRepository.java    // Интерфейс репозитория для работы с серверами в базе данных
+│   │               │   └── ServerService.java       // Сервис для выполнения операций с серверами
+│   │               └── HealthCheckApplication.java   // Основной класс приложения Spring Boot
+└── test
+    └── java
+        └── com
+            └── kukharev
+                └── health
+                    └── check
+                        ├── ErrorControllerTest.java     // Модульные тесты для ErrorController
+                        ├── ErrorLoggingServiceTest.java // Модульные тесты для ErrorLoggingService
+                        └── ServerControllerTest.java    // Модульные тесты для ServerController
