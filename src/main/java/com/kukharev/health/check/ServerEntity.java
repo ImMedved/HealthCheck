@@ -13,8 +13,6 @@ public class ServerEntity {
     private String address;
     private int errorCounter;
 
-    // Геттеры и сеттеры для полей
-
     public Long getId() {
         return id;
     }
