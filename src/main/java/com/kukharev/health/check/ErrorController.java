@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,8 @@ import java.util.stream.Collectors;
 public class ErrorController {
 
     private final ErrorRepository errorRepository;
+    private LocalDateTime timestamp;
+
 
     public ErrorController(ErrorRepository errorRepository) {
         this.errorRepository = errorRepository;
@@ -34,8 +37,12 @@ public class ErrorController {
     private ErrorDTO convertToErrorDTO(ErrorEntity errorEntity) {
         ErrorDTO errorDTO = new ErrorDTO();
         errorDTO.setId(errorEntity.getId());
-        errorDTO.setTimestamp(errorEntity.getTimestamp());
+        errorDTO.setTimestamp(getTimestamp());
         errorDTO.setServerName(errorEntity.getServer().getName());
         return errorDTO;
     }
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
 }

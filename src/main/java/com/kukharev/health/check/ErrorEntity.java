@@ -19,6 +19,8 @@ public class ErrorEntity {
     @Column(name = "timestamp")
     private LocalDateTime timestamp;
 
+    private int errorCode;
+
     // Getters and setters
     public ServerEntity getServer() {
         return server;
@@ -28,13 +30,11 @@ public class ErrorEntity {
         this.server = server;
     }
 
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
+
+    public void setErrorCode(int errorCode){this.errorCode = errorCode; }
 
     public Long getId() {
         return id;

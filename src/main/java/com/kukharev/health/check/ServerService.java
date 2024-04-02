@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -17,6 +18,7 @@ public class ServerService {
 
     private ErrorRepository errorRepository;
     private final ServerRepository serverRepository;
+    private LocalDateTime timestamp;
 
     @Autowired
     public ServerService(ServerRepository serverRepository) {
@@ -44,21 +46,28 @@ public class ServerService {
             int responseCode = connection.getResponseCode();
 
             if (responseCode != HttpURLConnection.HTTP_OK) {
-                logError(serverUrl);
+                logError(serverUrl, responseCode);
             }
         } catch (IOException e) {
             logger.error("Error occurred while checking server {}: {}", serverUrl, e.getMessage());
         }
     }
 
-    public void logError(String serverUrl) {
+    public void logError(String serverUrl, int responseCode) {
         ServerEntity serverEntity = serverRepository.findByUrl(serverUrl);
         if (serverEntity != null) {
             ErrorEntity errorEntity = new ErrorEntity();
             errorEntity.setServer(serverEntity);
+            errorEntity.setTimestamp(getTimestamp());
+            errorEntity.setErrorCode(responseCode);
             errorRepository.save(errorEntity);
             serverEntity.setErrorCounter(serverEntity.getErrorCounter() + 1);
             serverRepository.save(serverEntity);
         }
     }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
 }
