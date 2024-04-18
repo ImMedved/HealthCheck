@@ -6,22 +6,50 @@ src
 │   │           └── health
 │   │               ├── check
 │   │               │   ├── AppConfig.java           // Конфигурация Spring приложения
+│   │               │   ├── Application.java         // Точка входа приложения
 │   │               │   ├── ErrorController.java     // Контроллер для обработки запросов об ошибках
+│   │               │   ├── ErrorDTO.java            // Класс преобразования данных ServerService в объект DTO
 │   │               │   ├── ErrorEntity.java         // Сущность для хранения информации об ошибках в базе данных
-│   │               │   ├── ErrorLoggingService.java // Сервис для логирования ошибок в базу данных
-│   │               │   ├── ErrorLogService.java     // Контроллер для отображения логов ошибок в пользовательском интерфейсе
 │   │               │   ├── ErrorRepository.java     // Интерфейс репозитория для работы с ошибками в базе данных
 │   │               │   ├── ServerController.java    // Контроллер для работы с серверами
 │   │               │   ├── ServerEntity.java        // Сущность для хранения информации о серверах в базе данных
 │   │               │   ├── ServerRepository.java    // Интерфейс репозитория для работы с серверами в базе данных
 │   │               │   └── ServerService.java       // Сервис для выполнения операций с серверами
-│   │               └── HealthCheckApplication.java   // Основной класс приложения Spring Boot
 └── test
     └── java
         └── com
             └── kukharev
                 └── health
                     └── check
-                        ├── ErrorControllerTest.java     // Модульные тесты для ErrorController
-                        ├── ErrorLoggingServiceTest.java // Модульные тесты для ErrorLoggingService
-                        └── ServerControllerTest.java    // Модульные тесты для ServerController
+                        ├── AppConfigTest.java           // Модульные тесты для ErrorController
+                        ├── EntitysTest.java             // Модульные тесты для ErrorLoggingService
+                        └── ServerServiceTest.java       // Модульные тесты для ServerController
+
+
+
+src
+├── main
+│   ├── java
+│   │   └── com
+│   │       └── kukharev
+│   │           └── health
+│   │               ├── check
+│   │               │   ├── AppConfig.java           // Konfiguracija Spring aplikacije
+│   │               │   ├── Application.java         // Vhodna točka aplikacije
+│   │               │   ├── ErrorController.java     // Kontrolnik za obdelavo zahtevkov o napakah
+│   │               │   ├── ErrorDTO.java            // Razred za pretvorbo podatkov iz storitve strežnika v objekt DTO
+│   │               │   ├── ErrorEntity.java         // Entiteta za shranjevanje informacij o napakah v podatkovni bazi
+│   │               │   ├── ErrorRepository.java     // Vmesnik repozitorija za delo z napakami v podatkovni bazi
+│   │               │   ├── ServerController.java    // Kontrolnik za delo s strežniki
+│   │               │   ├── ServerEntity.java        // Entiteta za shranjevanje informacij o strežnikih v podatkovni bazi
+│   │               │   ├── ServerRepository.java    // Vmesnik repozitorija za delo s strežniki v podatkovni bazi
+│   │               │   └── ServerService.java       // Storitev za izvajanje operacij s strežniki
+└── test
+    └── java
+        └── com
+            └── kukharev
+                └── health
+                    └── check
+                        ├── AppConfigTest.java           // Modulni testi za ErrorController
+                        ├── EntitysTest.java             // Modulni testi za ErrorLoggingService
+                        └── ServerServiceTest.java       // Modulni testi za ServerController

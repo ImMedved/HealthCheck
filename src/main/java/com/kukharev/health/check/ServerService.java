@@ -30,11 +30,12 @@ public class ServerService {
         this.errorRepository = errorRepository;
     }
 
-    public void sendRequestsToServers() {
+    public void invokeServerService(){
         List<ServerEntity> servers = serverRepository.findAll();
         for (ServerEntity server : servers) {
             checkServer(server.getAddress());
         }
+
     }
 
     public void checkServer(String serverUrl) {
