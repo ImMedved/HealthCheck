@@ -9,3 +9,5 @@ INSERT INTO server (name, address, error_counter) VALUES ('Server 1', 'http://fa
 INSERT INTO server (name, address, error_counter) VALUES ('Server 2', 'http://fake-server-2.com', 1);
 INSERT INTO server (name, address, error_counter) VALUES ('Server 3', 'http://fake-server-3.com', 2);
 INSERT INTO server (name, address, error_counter) VALUES ('Server 4', 'http://fake-server-4.com', 3);
+
+

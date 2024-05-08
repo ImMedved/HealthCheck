@@ -16,7 +16,7 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest(classes = {AppConfig.class, ServerService.class})
 @ContextConfiguration
-public class ServerServiceTest {
+public class    ServerServiceTest {
 
     @Autowired
     private ServerService serverService;

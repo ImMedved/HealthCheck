@@ -1,16 +1,15 @@
 package com.kukharev.health.check;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "errors")
 public class ErrorEntity {
-    @Id
+    @EmbeddedId
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long Id;
 
     @ManyToOne
     @JoinColumn(name = "server_id", referencedColumnName = "id")
@@ -19,6 +18,7 @@ public class ErrorEntity {
     @Column(name = "timestamp")
     private LocalDateTime timestamp;
 
+    @Column(name = "error_code")
     private int errorCode;
 
     // Getters and setters
@@ -37,6 +37,8 @@ public class ErrorEntity {
     public void setErrorCode(int errorCode){this.errorCode = errorCode; }
 
     public Long getId() {
-        return id;
+        return Id;
     }
 }
+
+

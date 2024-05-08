@@ -44,5 +44,5 @@ public class ErrorController {
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
-
 }
+

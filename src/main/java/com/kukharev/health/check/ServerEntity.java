@@ -10,7 +10,7 @@ public class ServerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String address;
+    private String url;
     private int errorCounter;
 
     public Long getId() {
@@ -30,11 +30,11 @@ public class ServerEntity {
     }
 
     public String getAddress() {
-        return address;
+        return url;
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.url = address;
     }
 
     public int getErrorCounter() {
