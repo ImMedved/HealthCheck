@@ -1,20 +1,44 @@
-ServerEntity: Этот класс представляет объект сервера с полями id, name, address и errorCounter. Он аннотирован
-как JPA (Java Persistence API).
+**HealthCheck Project**
 
-ServerRepository: Интерфейс ServerRepository наследуется от JpaRepository, он используется postgreSQL
-в качестве базы данных для сохранения объектов ServerEntity.
+---
 
-AppConfig: Класс конфигурации Spring содержит настройки, необходимые для создания RestTemplate.
+**Description:**
 
-ServerService: Это сервис, который выполняет основную логику приложения. Он взаимодействует с ServerRepository для
-получения списка серверов и использует RestTemplate для проверки состояния каждого сервера. Если сервер не отвечает
-или возвращает код ответа, отличный от 200, сервис вызывает ErrorNotificationService для уведомления о проблеме.
+The HealthCheck project is a comprehensive server monitoring system designed to provide real-time insights into the availability and performance of servers. Developed as part of a school graduation project, the system allows users to monitor multiple servers simultaneously and receive notifications about any detected issues.
 
-ErrorNotificationService: Уведомление об ошибке.
+**Technologies Used:**
 
-ServerController: Это контроллер Spring, который обрабатывает HTTP-запросы для получения списка серверов.
+- Java: The core programming language used for backend development.
+- Spring Boot: Provides a robust framework for building and deploying Java-based applications.
+- Hibernate: Object-relational mapping (ORM) tool for interacting with the database.
+- PostgreSQL: Database management system for storing server and error data.
+- Spring Data JPA: Simplifies data access layer implementation with JPA.
+- Thymeleaf: Server-side Java template engine for dynamic web content generation.
+- HTML/CSS: Frontend technologies for designing the user interface.
+- Maven: Dependency management tool for Java projects.
 
-checkServers(): Метод checkServers() в ServerService выполняет итерацию по всем серверам, отправляя HTTP-запросы с помощью
-RestTemplate и обрабатывает ошибки.
+**Key Classes and Responsibilities:**
 
+1. **ServerEntity:** Represents a server entity in the database, storing information such as server name, URL, and current status.
 
+2. **ErrorEntity:** Stores error logs related to server monitoring, including error timestamps and associated server IDs.
+
+3. **ServerController:** Handles HTTP requests related to server management, such as adding new servers and retrieving server information.
+
+4. **ErrorController:** Manages error-related HTTP requests, including logging errors and retrieving error logs.
+
+5. **ServerService:** Provides business logic for server-related operations, such as adding servers and updating server status.
+
+6. **ErrorService:** Implements error handling logic, including error logging and retrieval.
+
+7. **AppConfig:** Configuration class responsible for configuring beans, including the RestTemplate bean for making HTTP requests.
+
+**Usage:**
+
+1. Clone the repository to your local machine.
+2. Open the project in your preferred Java IDE.
+3. Configure the database connection details in the application.properties file.
+4. Build and run the application.
+5. Access the web interface to monitor servers and view error logs.
+
+---
