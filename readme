@@ -1,12 +1,10 @@
-**HealthCheck Project**
+#HealthCheck Project
 
 ---
 
-**Description:**
-
 The HealthCheck project is a comprehensive server monitoring system designed to provide real-time insights into the availability and performance of servers. Developed as part of a school graduation project, the system allows users to monitor multiple servers simultaneously and receive notifications about any detected issues.
 
-**Technologies Used:**
+##Technologies Used
 
 - Java: The core programming language used for backend development.
 - Spring Boot: Provides a robust framework for building and deploying Java-based applications.
@@ -17,28 +15,28 @@ The HealthCheck project is a comprehensive server monitoring system designed to 
 - HTML/CSS: Frontend technologies for designing the user interface.
 - Maven: Dependency management tool for Java projects.
 
-**Key Classes and Responsibilities:**
+##Key Classes and Responsibilities
 
-1. **ServerEntity:** Represents a server entity in the database, storing information such as server name, URL, and current status.
+- ServerEntity: Represents a server entity in the database, storing information such as server name, URL, and current status.
 
-2. **ErrorEntity:** Stores error logs related to server monitoring, including error timestamps and associated server IDs.
+- ErrorEntity: Stores error logs related to server monitoring, including error timestamps and associated server IDs.
 
-3. **ServerController:** Handles HTTP requests related to server management, such as adding new servers and retrieving server information.
+- ServerController: Handles HTTP requests related to server management, such as adding new servers and retrieving server information.
 
-4. **ErrorController:** Manages error-related HTTP requests, including logging errors and retrieving error logs.
+- ErrorController: Manages error-related HTTP requests, including logging errors and retrieving error logs.
 
-5. **ServerService:** Provides business logic for server-related operations, such as adding servers and updating server status.
+- ServerService: Provides business logic for server-related operations, such as adding servers and updating server status.
 
-6. **ErrorService:** Implements error handling logic, including error logging and retrieval.
+- ErrorService: Implements error handling logic, including error logging and retrieval.
 
-7. **AppConfig:** Configuration class responsible for configuring beans, including the RestTemplate bean for making HTTP requests.
+- AppConfig Configuration class responsible for configuring beans, including the RestTemplate bean for making HTTP requests.
 
-**Usage:**
+##Usage
 
-1. Clone the repository to your local machine.
-2. Open the project in your preferred Java IDE.
-3. Configure the database connection details in the application.properties file.
-4. Build and run the application.
-5. Access the web interface to monitor servers and view error logs.
+- Clone the repository to your local machine.
+- Open the project in your preferred Java IDE.
+- Configure the database connection details in the application.properties file.
+- Build and run the application.
+- Access the web interface to monitor servers and view error logs.
 
 ---
