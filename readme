@@ -1,10 +1,10 @@
-#HealthCheck Project
+# HealthCheck Project
 
 ---
 
 The HealthCheck project is a comprehensive server monitoring system designed to provide real-time insights into the availability and performance of servers. Developed as part of a school graduation project, the system allows users to monitor multiple servers simultaneously and receive notifications about any detected issues.
 
-##Technologies Used
+## Technologies Used
 
 - Java: The core programming language used for backend development.
 - Spring Boot: Provides a robust framework for building and deploying Java-based applications.
@@ -15,7 +15,7 @@ The HealthCheck project is a comprehensive server monitoring system designed to 
 - HTML/CSS: Frontend technologies for designing the user interface.
 - Maven: Dependency management tool for Java projects.
 
-##Key Classes and Responsibilities
+## Key Classes and Responsibilities
 
 - ServerEntity: Represents a server entity in the database, storing information such as server name, URL, and current status.
 
@@ -31,7 +31,7 @@ The HealthCheck project is a comprehensive server monitoring system designed to 
 
 - AppConfig Configuration class responsible for configuring beans, including the RestTemplate bean for making HTTP requests.
 
-##Usage
+## Usage
 
 - Clone the repository to your local machine.
 - Open the project in your preferred Java IDE.
